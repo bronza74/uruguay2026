@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Uruguai 2026">
+<meta name="theme-color" content="#0d1b1e">
+<title>Uruguai 2026 · Roteiro</title>
+<link rel="manifest" href="data:application/json;base64,eyJuYW1lIjoiVXJ1Z3VhaSAyMDI2Iiwic2hvcnRfbmFtZSI6IlVydWd1YWkiLCJzdGFydF91cmwiOiIuIiwiZGlzcGxheSI6InN0YW5kYWxvbmUiLCJiYWNrZ3JvdW5kX2NvbG9yIjoiIzBkMWIxZSIsInRoZW1lX2NvbG9yIjoiIzBkMWIxZSJ9">
+<style>
+:root{
+  --bg:#0d1b1e;
+  --bg2:#122428;
+  --card:#16292d;
+  --card2:#1c3236;
+  --line:rgba(255,255,255,.08);
+  --ink:#eef3f2;
+  --ink-dim:#9db3b0;
+  --ink-faint:#5e7573;
+  --sol:#e8a33d;
+  --terra:#c1613f;
+  --mate:#7a9471;
+  --vino:#8a3b45;
+  --azul:#3f7d8c;
+  --arena:#d9c7a3;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{background:var(--bg);color:var(--ink)}
+body{
+  font-family:'Fraunces',Georgia,serif;
+  font-size:15px;
+  padding-bottom:90px;
+  background:
+    radial-gradient(ellipse 800px 400px at 50% -10%, rgba(232,163,61,.08), transparent),
+    var(--bg);
+}
+@font-face{
+  font-family:'Fraunces';
+  src:local('Georgia');
+}
+.sans{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
+
+/* ===== HEADER ===== */
+.header{
+  position:sticky;top:0;z-index:100;
+  background:rgba(13,27,30,.96);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line);
+  padding:16px 18px 12px;
+}
+.eyebrow{
+  font-family:-apple-system,BlinkMacSystemFont,sans-serif;
+  font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--sol);margin-bottom:4px;display:flex;align-items:center;gap:8px;
+}
+.eyebrow::before{content:'';width:16px;height:1px;background:var(--sol)}
+.app-title{
+  font-size:26px;font-weight:600;letter-spacing:-.01em;
+  display:flex;align-items:baseline;gap:10px;
+}
+.version-badge{
+  font-family:-apple-system,sans-serif;font-size:10px;font-weight:700;
+  background:var(--card2);color:var(--ink-dim);padding:2px 8px;border-radius:20px;
+  border:1px solid var(--line);letter-spacing:.05em;
+}
+.header-sub{
+  font-family:-apple-system,BlinkMacSystemFont,sans-serif;
+  font-size:12px;color:var(--ink-dim);margin-top:5px;
+}
+
+/* ===== TABS ===== */
+.tabs{
+  display:flex;gap:6px;overflow-x:auto;padding:14px 18px 0;
+  scrollbar-width:none;-ms-overflow-style:none;
+}
+.tabs::-webkit-scrollbar{display:none}
+.tab{
+  font-family:-apple-system,sans-serif;
+  flex-shrink:0;padding:7px 14px;font-size:12px;font-weight:600;
+  border:1px solid var(--line);border-radius:20px;cursor:pointer;
+  background:transparent;color:var(--ink-dim);transition:all .2s;white-space:nowrap;
+}
+.tab.active{
+  background:var(--sol);color:#1a1006;border-color:var(--sol);
+}
+
+.view{display:none;padding:18px}
+.view.active{display:block}
+
+/* ===== OVERVIEW ===== */
+.hero-card{
+  border:1px solid var(--line);border-radius:18px;overflow:hidden;
+  background:linear-gradient(160deg, var(--card), var(--card2));
+  margin-bottom:18px;position:relative;
+}
+.hero-strip{height:5px;background:linear-gradient(90deg,var(--sol),var(--terra),var(--mate),var(--azul))}
+.hero-body{padding:20px}
+.hero-title{font-size:19px;font-weight:600;margin-bottom:6px}
+.hero-desc{font-family:-apple-system,sans-serif;font-size:12.5px;color:var(--ink-dim);line-height:1.6}
+
+.stat-row{display:flex;gap:10px;margin:16px 0}
+.stat{flex:1;text-align:center;padding:10px 4px;background:var(--bg2);border-radius:10px;border:1px solid var(--line)}
+.stat-num{font-size:20px;font-weight:700;color:var(--sol)}
+.stat-label{font-family:-apple-system,sans-serif;font-size:9px;color:var(--ink-faint);text-transform:uppercase;letter-spacing:.05em;margin-top:2px}
+
+.section-title{
+  font-family:-apple-system,sans-serif;
+  font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-faint);margin:22px 0 10px;display:flex;align-items:center;gap:8px;
+}
+.section-title::after{content:'';flex:1;height:1px;background:var(--line)}
+
+.flight-card{
+  display:flex;align-items:center;gap:12px;padding:12px 14px;
+  background:var(--card);border:1px solid var(--line);border-radius:12px;margin-bottom:8px;
+}
+.flight-route{font-family:-apple-system,sans-serif;font-weight:700;font-size:13px;flex-shrink:0;color:var(--ink)}
+.flight-arrow{color:var(--ink-faint)}
+.flight-info{font-family:-apple-system,sans-serif;font-size:11px;color:var(--ink-dim);flex:1}
+.flight-code{font-family:-apple-system,sans-serif;font-size:10px;color:var(--ink-faint)}
+
+.alert{
+  display:flex;gap:10px;padding:11px 13px;border-radius:10px;margin-bottom:7px;
+  background:var(--card);border:1px solid var(--line);border-left:3px solid var(--sol);
+}
+.alert.warn{border-left-color:var(--terra)}
+.alert.info{border-left-color:var(--azul)}
+.alert-icon{font-size:16px;flex-shrink:0}
+.alert-text{font-family:-apple-system,sans-serif;font-size:11.5px;color:var(--ink-dim);line-height:1.5}
+.alert-text strong{color:var(--ink);display:block;margin-bottom:2px;font-size:12px}
+
+.wine-teaser{
+  display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:6px;
+}
+.wine-card{
+  background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;
+  border-top:2px solid var(--vino);
+}
+.wine-name{font-size:14px;font-weight:600;margin-bottom:3px}
+.wine-loc{font-family:-apple-system,sans-serif;font-size:10px;color:var(--ink-faint);margin-bottom:6px}
+.wine-desc{font-family:-apple-system,sans-serif;font-size:10.5px;color:var(--ink-dim);line-height:1.5}
+
+/* ===== DAY PILLS ===== */
+.day-pills{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none}
+.day-pills::-webkit-scrollbar{display:none}
+.day-pill{
+  flex-shrink:0;width:64px;padding:10px 6px;border-radius:12px;text-align:center;cursor:pointer;
+  background:var(--card);border:1px solid var(--line);transition:all .2s;
+}
+.day-pill.active{background:var(--sol);border-color:var(--sol)}
+.pill-date{font-family:-apple-system,sans-serif;font-size:15px;font-weight:700;color:var(--ink)}
+.day-pill.active .pill-date{color:#1a1006}
+.pill-label{font-family:-apple-system,sans-serif;font-size:8.5px;color:var(--ink-faint);margin-top:2px;line-height:1.2}
+.day-pill.active .pill-label{color:#1a1006}
+
+/* ===== DAY DETAIL ===== */
+.day-header{margin:18px 0 14px}
+.day-title{font-size:20px;font-weight:600;margin-bottom:4px}
+.day-phase{
+  display:inline-block;font-family:-apple-system,sans-serif;font-size:10px;font-weight:700;
+  padding:3px 10px;border-radius:20px;margin-bottom:8px;letter-spacing:.03em;
+}
+.day-subtitle{font-family:-apple-system,sans-serif;font-size:12px;color:var(--ink-dim);line-height:1.5;margin-bottom:10px}
+.chip-row{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:4px}
+.chip{
+  font-family:-apple-system,sans-serif;font-size:9.5px;font-weight:600;
+  padding:3px 9px;border-radius:20px;white-space:nowrap;
+}
+.chip-sol{background:rgba(232,163,61,.15);color:var(--sol)}
+.chip-terra{background:rgba(193,97,63,.15);color:var(--terra)}
+.chip-mate{background:rgba(122,148,113,.15);color:var(--mate)}
+.chip-vino{background:rgba(138,59,69,.18);color:#d68b93}
+.chip-azul{background:rgba(63,125,140,.18);color:#7ec4d6}
+.chip-gray{background:rgba(255,255,255,.06);color:var(--ink-faint)}
+
+/* ===== TIMELINE ===== */
+.timeline{position:relative;margin-top:16px;padding-left:22px}
+.timeline::before{content:'';position:absolute;left:5px;top:6px;bottom:6px;width:1.5px;background:var(--line)}
+.tl-item{position:relative;padding-bottom:22px}
+.tl-item:last-child{padding-bottom:0}
+.tl-dot{position:absolute;left:-22px;top:3px;width:11px;height:11px;border-radius:50%;border:2px solid var(--bg)}
+.tl-time-row{display:flex;align-items:baseline;gap:8px;margin-bottom:3px}
+.tl-time{font-family:-apple-system,sans-serif;font-weight:700;font-size:13px;color:var(--sol)}
+.tl-dur{font-family:-apple-system,sans-serif;font-size:10px;color:var(--ink-faint)}
+.tl-title{font-size:15.5px;font-weight:600;margin-bottom:4px;line-height:1.3}
+.tl-sub{font-family:-apple-system,sans-serif;font-size:12px;color:var(--ink-dim);line-height:1.55;margin-bottom:7px}
+.tl-chips{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:6px}
+
+.detail-toggle{
+  font-family:-apple-system,sans-serif;font-size:10.5px;font-weight:700;color:var(--azul);
+  cursor:pointer;display:inline-flex;align-items:center;gap:4px;margin-top:2px;
+}
+.detail-toggle .arrow{transition:transform .2s;font-size:9px}
+.detail-toggle.open .arrow{transform:rotate(90deg)}
+.detail-box{
+  display:none;margin-top:8px;padding:10px 12px;background:var(--bg2);border-radius:8px;
+  border-left:2px solid var(--azul);
+}
+.detail-box.open{display:block}
+.detail-line{font-family:-apple-system,sans-serif;font-size:11px;color:var(--ink-dim);line-height:1.6;margin-bottom:6px;padding-left:10px;position:relative}
+.detail-line:last-child{margin-bottom:0}
+.detail-line::before{content:'—';position:absolute;left:0;color:var(--ink-faint)}
+
+.costs-box{
+  margin-top:20px;padding:14px 16px;background:var(--card);border:1px solid var(--line);border-radius:12px;
+}
+.costs-title{font-family:-apple-system,sans-serif;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:8px}
+.cost-row{display:flex;justify-content:space-between;font-family:-apple-system,sans-serif;font-size:12px;padding:4px 0;color:var(--ink-dim)}
+.cost-row.total{border-top:1px solid var(--line);margin-top:4px;padding-top:8px;font-weight:700;color:var(--ink)}
+
+/* ===== INFO CARDS (wineries, colonia) ===== */
+.info-card{
+  background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:12px;
+  border-top:3px solid var(--vino);
+}
+.info-card.opt{border-top-color:var(--azul)}
+.info-card-title{font-size:16px;font-weight:600;margin-bottom:3px;display:flex;align-items:center;gap:8px}
+.info-card-loc{font-family:-apple-system,sans-serif;font-size:10.5px;color:var(--ink-faint);margin-bottom:10px}
+.info-row{display:flex;gap:8px;padding:6px 0;border-bottom:1px solid var(--line);font-family:-apple-system,sans-serif;font-size:11.5px}
+.info-row:last-child{border-bottom:none}
+.info-label{color:var(--ink-faint);flex-shrink:0;width:88px}
+.info-value{color:var(--ink-dim);flex:1}
+
+/* ===== FOOTER NAV ===== */
+.footer-nav{
+  position:fixed;bottom:0;left:0;right:0;z-index:100;
+  background:rgba(13,27,30,.97);backdrop-filter:blur(12px);
+  border-top:1px solid var(--line);
+  display:flex;justify-content:space-around;padding:10px 8px calc(10px + env(safe-area-inset-bottom));
+}
+.nav-btn{
+  font-family:-apple-system,sans-serif;display:flex;flex-direction:column;align-items:center;gap:2px;
+  color:var(--ink-faint);cursor:pointer;font-size:9px;font-weight:600;padding:4px 10px;
+}
+.nav-btn.active{color:var(--sol)}
+.nav-icon{font-size:19px}
+
+::-webkit-scrollbar{width:0px;background:transparent}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="eyebrow">Uy · 29 out – 2 nov 2026</div>
+  <div class="app-title">🧉 URUGUAI <span class="version-badge">v1.0</span></div>
+  <div class="header-sub">4 noites · 2 hotéis a 6 min a pé · 2 casais</div>
+</div>
+
+<div class="tabs">
+  <div class="tab active" onclick="showView('overview',this)">Visão geral</div>
+  <div class="tab" onclick="showView('days',this)">Dia a dia</div>
+  <div class="tab" onclick="showView('wines',this)">Vinícolas</div>
+  <div class="tab" onclick="showView('colonia',this)">Colonia</div>
+  <div class="tab" onclick="showView('info',this)">Info</div>
+</div>
+
+<!-- ================= OVERVIEW ================= -->
+<div id="view-overview" class="view active">
+
+  <div class="hero-card">
+    <div class="hero-strip"></div>
+    <div class="hero-body">
+      <div class="hero-title">Montevidéu, vinho e o Rio da Prata</div>
+      <div class="hero-desc">5 dias entre a Ciudad Vieja, a Rambla mais longa da América Latina, vinícolas premiadas e a badalação de Punta del Este. Os 2 casais ficam em hotéis vizinhos na Ciudad Vieja — NH Columbia e AXSUR Design, a 6 min de distância. Ritmo equilibrado — cultura de manhã, vinho à tarde, pôr do sol sempre na Rambla.</div>
+      <div class="stat-row">
+        <div class="stat"><div class="stat-num">5</div><div class="stat-label">Dias</div></div>
+        <div class="stat"><div class="stat-num">2</div><div class="stat-label">Vinícolas</div></div>
+        <div class="stat"><div class="stat-num">130km</div><div class="stat-label">Punta del Este</div></div>
+        <div class="stat"><div class="stat-num">4</div><div class="stat-label">Pessoas</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">Voos confirmados</div>
+  <div class="flight-card">
+    <div class="flight-route">REC → GRU</div>
+    <div class="flight-arrow">✈︎</div>
+    <div class="flight-info">Qui 29/out · 3h40 – 6h55<div class="flight-code">GOL G3 1561</div></div>
+  </div>
+  <div class="flight-card">
+    <div class="flight-route">GRU → MVD</div>
+    <div class="flight-arrow">✈︎</div>
+    <div class="flight-info">Qui 29/out · 9h30 – 12h15<div class="flight-code">GOL G3 7630</div></div>
+  </div>
+  <div class="flight-card">
+    <div class="flight-route">MVD → GRU</div>
+    <div class="flight-arrow">✈︎</div>
+    <div class="flight-info">Seg 2/nov · 11h35 – 14h15<div class="flight-code">LATAM LA 8117</div></div>
+  </div>
+  <div class="flight-card">
+    <div class="flight-route">GRU → REC</div>
+    <div class="flight-arrow">✈︎</div>
+    <div class="flight-info">Seg 2/nov · 17h35 – 20h35<div class="flight-code">LATAM LA 3376</div></div>
+  </div>
+
+  <div class="section-title">Alertas do roteiro</div>
+  <div class="alert warn">
+    <div class="alert-icon">🍷</div>
+    <div class="alert-text"><strong>Bodega Garzón — reservar com 1-2 semanas de antecedência</strong>Experiências fechadas com vagas limitadas por horário. Reservar por bodegagarzon.com ou e-mail. Cancelamento sem custo até 24-48h antes.</div>
+  </div>
+  <div class="alert warn">
+    <div class="alert-icon">🚗</div>
+    <div class="alert-text"><strong>Punta del Este + Garzón não cabem num bate-volta de Montevidéu</strong>São 130km até Punta (2h) + mais ~50min até Garzón. Ida cedo (7h-7h30) é essencial para não voltar de madrugada.</div>
+  </div>
+  <div class="alert info">
+    <div class="alert-icon">💳</div>
+    <div class="alert-text"><strong>Pagamento com cartão = desconto de IVA (~18%)</strong>Turistas estrangeiros pagando com cartão internacional em restaurantes e hotéis têm desconto de imposto automático no Uruguai. Prefira cartão a dinheiro.</div>
+  </div>
+  <div class="alert">
+    <div class="alert-icon">🏨</div>
+    <div class="alert-text"><strong>2 hotéis, mesma vizinhança — Ciudad Vieja</strong>NH Montevideo Columbia (Rambla Gran Bretaña 473) e AXSUR Design Hotel (Misiones 1260) ficam a apenas 6-7 min a pé um do outro. Pontos de encontro combinados diariamente.</div>
+  </div>
+  <div class="alert info">
+    <div class="alert-icon">🚶</div>
+    <div class="alert-text"><strong>Ponto de encontro sugerido: Plaza Zabala</strong>Fica praticamente no meio do caminho entre os dois hotéis (~350m de cada). Bom ponto neutro para os 2 casais se encontrarem antes de sair para os passeios do dia.</div>
+  </div>
+
+  <div class="section-title">Vinícolas em destaque</div>
+  <div class="wine-teaser">
+    <div class="wine-card">
+      <div class="wine-name">Bodega Garzón</div>
+      <div class="wine-loc">Maldonado · perto de Punta del Este</div>
+      <div class="wine-desc">#4 do mundo no ranking World's Best Vineyards 2026. Arquitetura sobre rocha basáltica, vista do Atlântico.</div>
+    </div>
+    <div class="wine-card">
+      <div class="wine-name">Bodega Bouza</div>
+      <div class="wine-loc">Melilla · 20 min do centro</div>
+      <div class="wine-desc">4.5★ Tripadvisor, #26 de 990 restaurantes de Montevidéu. Boutique, garagem de carros clássicos, Tannat premiado.</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ================= DAYS ================= -->
+<div id="view-days" class="view">
+
+  <div class="day-pills" id="dayPills"></div>
+  <div id="dayContent"></div>
+
+</div>
+
+<!-- ================= WINES ================= -->
+<div id="view-wines" class="view">
+
+  <div class="section-title">🍷 Bodega Garzón — Dia 4</div>
+  <div class="info-card">
+    <div class="info-card-title">Bodega Garzón</div>
+    <div class="info-card-loc">Camino Arco del Sol, Garzón, Maldonado</div>
+    <div class="info-row"><div class="info-label">Reconhecimento</div><div class="info-value">#4 no World's Best Vineyards 2026 — única uruguaia no Top 50 mundial</div></div>
+    <div class="info-row"><div class="info-label">Distância</div><div class="info-value">~50 min de Punta del Este · ~2h50 de Montevidéu direto</div></div>
+    <div class="info-row"><div class="info-label">Duração</div><div class="info-value">Tour Reserva ~1h15 · com almoço 4 tempos ~4h</div></div>
+    <div class="info-row"><div class="info-label">Restaurante</div><div class="info-value">Comandado por Francis Mallmann (5 estrelas Michelin) — brasas ao ar livre</div></div>
+    <div class="info-row"><div class="info-label">Preço</div><div class="info-value">Tour + degustação ~UYU 1.500/pessoa (~R$100) · com almoço bem mais</div></div>
+    <div class="info-row"><div class="info-label">Reserva</div><div class="info-value">bodegagarzon.com — sistema próprio 24h · obrigatório reservar antes</div></div>
+  </div>
+
+  <div class="section-title">🍷 Bodega Bouza — Dia 3</div>
+  <div class="info-card">
+    <div class="info-card-title">Bodega Bouza</div>
+    <div class="info-card-loc">Melilla, zona oeste de Montevidéu</div>
+    <div class="info-row"><div class="info-label">Avaliação</div><div class="info-value">4.5★ Tripadvisor · #26 de 990 restaurantes de Montevidéu</div></div>
+    <div class="info-row"><div class="info-label">Distância</div><div class="info-value">~20-30 min do centro / hotel — a mais próxima das duas</div></div>
+    <div class="info-row"><div class="info-label">Diferencial</div><div class="info-value">Garagem de carros clássicos + vinícola boutique + restaurante premiado</div></div>
+    <div class="info-row"><div class="info-label">Especialidade</div><div class="info-value">Tannat — uva-símbolo do Uruguai. Elogiado nas reviews como "superb"</div></div>
+    <div class="info-row"><div class="info-label">Formato</div><div class="info-value">Tour + degustação, ou pacote com almoço 3-5 tempos harmonizado</div></div>
+    <div class="info-row"><div class="info-label">Reserva</div><div class="info-value">bodegabouza.com ou Civitatis — traslado do hotel pode estar incluso</div></div>
+  </div>
+
+</div>
+
+<!-- ================= COLONIA (opcional) ================= -->
+<div id="view-colonia" class="view">
+
+  <div class="section-title">🏛️ Colonia del Sacramento — Opcional</div>
+  <div class="info-card opt">
+    <div class="info-card-title">Colonia del Sacramento</div>
+    <div class="info-card-loc">180km de Montevidéu · Patrimônio Mundial UNESCO</div>
+    <div class="info-row"><div class="info-label">Distância</div><div class="info-value">~2h de carro ou ~2h40-3h de ônibus (COT/Turil) cada trecho</div></div>
+    <div class="info-row"><div class="info-label">Realista?</div><div class="info-value">Bate-volta consome o dia quase todo (4h+ só de estrada ida/volta)</div></div>
+    <div class="info-row"><div class="info-label">Destaques</div><div class="info-value">Calle de los Suspiros, Basílica del Santísimo Sacramento (1680), Farol, Plaza Mayor</div></div>
+    <div class="info-row"><div class="info-label">Onde encaixa</div><div class="info-value">Só sobra espaço trocando um dos dias de Montevidéu — não recomendado com 5 dias corridos</div></div>
+  </div>
+
+  <div class="alert warn">
+    <div class="alert-icon">⚖️</div>
+    <div class="alert-text"><strong>Recomendação: manter opcional mesmo</strong>Com apenas 5 dias e já cobrindo Montevidéu + 2 vinícolas + Punta del Este, Colonia exigiria sacrificar um dia inteiro de cidade. Melhor deixar para uma próxima viagem com mais tempo, ou avaliar no local se sobrar energia no dia 5 antes do voo (não recomendado — risco para o horário do voo).</div>
+  </div>
+
+</div>
+
+<!-- ================= INFO ================= -->
+<div id="view-info" class="view">
+
+  <div class="section-title">🏨 Hospedagem — 2 casais, 2 hotéis vizinhos</div>
+  <div class="info-card">
+    <div class="info-card-title">NH Montevideo Columbia</div>
+    <div class="info-card-loc">Rambla Gran Bretaña 473, Ciudad Vieja</div>
+    <div class="info-row"><div class="info-label">Plaza Indep.</div><div class="info-value">400m</div></div>
+    <div class="info-row"><div class="info-label">Plaza Matriz</div><div class="info-value">6 min a pé</div></div>
+    <div class="info-row"><div class="info-label">Merc. del Puerto</div><div class="info-value">5 min a pé (1,1km)</div></div>
+    <div class="info-row"><div class="info-label">Teatro Solís</div><div class="info-value">12 min a pé (720m)</div></div>
+    <div class="info-row"><div class="info-label">Aeroporto</div><div class="info-value">Carrasco, ~25 min de carro (17,6km)</div></div>
+    <div class="info-row"><div class="info-label">Check-in/out</div><div class="info-value">15h00 / 12h00</div></div>
+  </div>
+
+  <div class="info-card opt">
+    <div class="info-card-title">AXSUR Design Hotel</div>
+    <div class="info-card-loc">Misiones 1260, Ciudad Vieja</div>
+    <div class="info-row"><div class="info-label">Do NH Columbia</div><div class="info-value">~6-7 min a pé (500m) — praticamente vizinhos</div></div>
+    <div class="info-row"><div class="info-label">Teatro Solís</div><div class="info-value">6 min a pé</div></div>
+    <div class="info-row"><div class="info-label">Plaza Independ.</div><div class="info-value">750m</div></div>
+    <div class="info-row"><div class="info-label">Porto/Solís</div><div class="info-value">500m</div></div>
+    <div class="info-row"><div class="info-label">Aeroporto</div><div class="info-value">Carrasco, ~30 min de carro (19mi)</div></div>
+    <div class="info-row"><div class="info-label">Check-in/out</div><div class="info-value">15h00 / 11h00</div></div>
+    <div class="info-row"><div class="info-label">Diferencial</div><div class="info-value">Rooftop terrace, hidromassagem, vista mar em alguns quartos</div></div>
+  </div>
+
+  <div class="alert info">
+    <div class="alert-icon">📍</div>
+    <div class="alert-text"><strong>Logística simplificada</strong>Como os hotéis ficam a poucos minutos um do outro, todos os passeios do roteiro funcionam igual para os 2 casais — basta ajustar o ponto de encontro (Plaza Zabala é o meio-termo) ou os traslados passarem nos dois hotéis.</div>
+  </div>
+
+  <div class="section-title">💰 Câmbio e pagamento</div>
+  <div class="info-card">
+    <div class="info-row"><div class="info-label">Moeda</div><div class="info-value">Peso Uruguaio (UYU) — cartão internacional aceito amplamente</div></div>
+    <div class="info-row"><div class="info-label">Desconto IVA</div><div class="info-value">~18% de volta pagando com cartão intl. em restaurantes/hotéis — automático</div></div>
+    <div class="info-row"><div class="info-label">Dica</div><div class="info-value">Prefira cartão a dinheiro sempre que possível pelo desconto de imposto</div></div>
+  </div>
+
+  <div class="section-title">🌊 Rambla de Montevidéu</div>
+  <div class="info-card">
+    <div class="info-row"><div class="info-label">Extensão</div><div class="info-value">A orla contínua mais longa da América Latina — 25km à beira do Rio da Prata</div></div>
+    <div class="info-row"><div class="info-label">O hotel</div><div class="info-value">Fica direto na Rambla — pôr do sol sem sair da porta</div></div>
+  </div>
+
+</div>
+
+<div class="footer-nav">
+  <div class="nav-btn active" onclick="footerNav('overview',this)"><div class="nav-icon">🧉</div>Geral</div>
+  <div class="nav-btn" onclick="footerNav('days',this)"><div class="nav-icon">📅</div>Dias</div>
+  <div class="nav-btn" onclick="footerNav('wines',this)"><div class="nav-icon">🍷</div>Vinho</div>
+  <div class="nav-btn" onclick="footerNav('colonia',this)"><div class="nav-icon">🏛️</div>Colonia</div>
+  <div class="nav-btn" onclick="footerNav('info',this)"><div class="nav-icon">ℹ️</div>Info</div>
+</div>
+
+<script>
+const DAYS = {
+'29':{title:'Quinta 29/10 — Chegada em Montevidéu',phase:'Chegada',phaseColor:'var(--sol)',phaseBg:'rgba(232,163,61,.15)',subtitle:'Pouso 12h15 · Traslado ao hotel · Ciudad Vieja leve · Pôr do sol na Rambla',chips:['chip-sol:Pouso 12h15','chip-mate:Ciudad Vieja leve'],
+timeline:[
+{t:'12h15',dur:'',dot:'#e8a33d',title:'✈️ Pouso — Aeroporto de Carrasco',sub:'Imigração + retirada de bagagem. Aeroporto pequeno e tranquilo — processo costuma ser rápido (20-30 min).',chips:['chip-gray:Processo rápido']},
+{t:'13h00',dur:'25-30 min',dot:'#3f7d8c',title:'🚕 Traslado aos hotéis — 2 casais',sub:'Táxi ou remis do aeroporto. NH Montevideo Columbia (Rambla Gran Bretaña) e AXSUR Design Hotel (Misiones 1260) ficam a 6-7 min a pé um do outro — dá para ir num único táxi maior ou dois táxis que chegam quase juntos.',chips:['chip-azul:~20km ambos'],
+detail:[{c:'#3f7d8c',t:'Táxis oficiais têm ponto identificado no saguão de chegadas do Aeroporto de Carrasco. Vans maiores (remis) cabem os 2 casais e bagagem com folga.'}]},
+{t:'13h30',dur:'',dot:'#7a9471',title:'🏨 Check-in — NH Columbia e AXSUR Design',sub:'Check-in oficial 15h nos dois — chegando antes, os hotéis guardam as malas. Aproveitar para almoçar algo leve juntos enquanto aguardam os quartos ficarem prontos.',chips:['chip-gray:Guardam malas','chip-mate:2 hotéis, 6 min entre eles']},
+{t:'14h00',dur:'60 min',dot:'#c1613f',title:'🍽️ Almoço leve — Ciudad Vieja',sub:'Restaurantes na Peatonal Sarandí ou próximos ao hotel. Chivito uruguaio ou algo rápido para testar a cozinha local no primeiro dia.',chips:['chip-terra:Chivito uruguaio']},
+{t:'15h30',dur:'90 min',dot:'#8a3b45',title:'🚶 Ciudad Vieja — primeira caminhada',sub:'Plaza Independencia (estátua de Artigas, Palacio Salvo ao fundo) → Peatonal Sarandí (rua de pedestres, lojas) → Plaza Matriz (Catedral Metropolitana, Cabildo).',chips:['chip-vino:Gratuito','chip-gray:A pé do hotel'],
+detail:[{c:'#8a3b45',t:'Palacio Salvo: prédio icônico de Montevidéu, visível de quase toda a Ciudad Vieja — inspirado no Palazzo Barolo de Buenos Aires.'},{c:'#8a3b45',t:'Plaza Matriz é a praça mais antiga da cidade, fundada em 1726 junto com a fundação de Montevidéu.'}]},
+{t:'17h30',dur:'60 min',dot:'#3f7d8c',title:'🌅 Rambla — primeiro pôr do sol',sub:'O hotel já está sobre a Rambla. Caminhada tranquila à beira do Rio da Prata para o pôr do sol de chegada — ritual que vai se repetir todos os dias.',chips:['chip-azul:Direto do hotel','chip-gray:Gratuito']},
+{t:'20h00',dur:'',dot:'#e8a33d',title:'🥩 Jantar — Mercado del Puerto',sub:'5 min a pé do hotel. Parrillas tradicionais dentro do mercado histórico de ferro. Provar a parrillada completa com os 2 casais.',chips:['chip-sol:5 min do hotel','chip-terra:Parrillada']}],
+costs:[['Táxi aeroporto→hotéis (2)','~UYU 1.800-2.400'],['Almoço (4p)','~UYU 3.200'],['Jantar Mercado del Puerto (4p)','~UYU 6.500'],['TOTAL','~UYU 11.500-12.100']]},
+
+'30':{title:'Sexta 30/10 — Ciudad Vieja completa + Rambla',phase:'Montevidéu',phaseColor:'#7a9471',phaseBg:'rgba(122,148,113,.15)',subtitle:'Teatro Solís · Mercado Agrícola · Rambla de bike · Pocitos',chips:['chip-mate:Ciudad Vieja','chip-azul:Rambla de bike'],
+timeline:[
+{t:'09h00',dur:'',dot:'#e8a33d',title:'☕ Café da manhã no hotel',sub:'Buffet do NH com vista para o Rio da Prata. Começar o dia com calma.',chips:['chip-gray:No hotel']},
+{t:'10h00',dur:'75 min',dot:'#8a3b45',title:'🎭 Teatro Solís',sub:'Teatro mais importante do Uruguai, inaugurado em 1856. Visitas guiadas pela manhã. Arquitetura neoclássica impressionante por dentro.',chips:['chip-vino:Visita guiada','chip-gray:12 min do hotel'],
+detail:[{c:'#8a3b45',t:'Verificar horários de visita guiada em inglês/espanhol no site do teatro antes de ir — costumam ter horários fixos pela manhã.'}]},
+{t:'11h30',dur:'45 min',dot:'#3f7d8c',title:'🏛️ Palacio Taranco',sub:'Mansão em estilo francês do início do século XX, hoje Museu de Artes Decorativas. A poucos passos do Teatro Solís.',chips:['chip-azul:Museu']},
+{t:'12h30',dur:'90 min',dot:'#c1613f',title:'🍽️ Almoço — Mercado Agrícola (MAM)',sub:'Mercado histórico reformado, cheio de bancas gastronômicas variadas — massas, frutos do mar, cervejas artesanais. Ambiente descontraído.',chips:['chip-terra:Bancas variadas']},
+{t:'14h30',dur:'2h',dot:'#3f7d8c',title:'🚴 Rambla de bicicleta',sub:'Aluguel de bikes perto do hotel — a Rambla é plana, segura e cheia de montevideanos correndo, andando de skate, tomando chimarrão. 25km de orla contínua, pedalar o trecho que quiser.',chips:['chip-azul:Aluguel de bike','chip-gray:Trecho livre'],
+detail:[{c:'#3f7d8c',t:'Vários pontos de aluguel na Rambla perto da Ciudad Vieja. Pedalar até Pocitos e voltar é um bom trecho de 1-2h.'}]},
+{t:'17h00',dur:'60 min',dot:'#e8a33d',title:'🛍️ Punta Carretas Shopping (opcional)',sub:'Bairro de Pocitos — antigo presídio transformado em shopping. Bom para quem quiser fazer compras num ambiente diferente.',chips:['chip-sol:Opcional']},
+{t:'18h30',dur:'',dot:'#3f7d8c',title:'🌅 Pôr do sol — Rambla Pocitos ou volta ao hotel',sub:'Se estiver em Pocitos, aproveitar o pôr do sol por lá antes de voltar. Praia urbana bonita mesmo fora do verão.',chips:['chip-azul:Rambla Pocitos']},
+{t:'20h30',dur:'',dot:'#8a3b45',title:'🍽️ Jantar — Ciudad Vieja ou Pocitos',sub:'Restaurante tradicional uruguaio — parrilla ou cozinha de autor. Segunda noite, experimentar algo diferente do primeiro dia.',chips:['chip-vino:Jantar tradicional']}],
+costs:[['Aluguel bikes (4p)','~UYU 2.400'],['Almoço MAM (4p)','~UYU 4.800'],['Jantar (4p)','~UYU 7.200'],['TOTAL','~UYU 14.400']]},
+
+'31':{title:'Sábado 31/10 — Bodega Bouza + Cerro',phase:'Vinícola',phaseColor:'#8a3b45',phaseBg:'rgba(138,59,69,.18)',subtitle:'Manhã: Bodega Bouza (tour + almoço) · Tarde: Cerro de Montevidéu + Fortaleza',chips:['chip-vino:Bodega Bouza','chip-mate:Cerro panorâmico'],
+timeline:[
+{t:'09h30',dur:'',dot:'#e8a33d',title:'🏨 Café da manhã + saída',sub:'Café no hotel. Transfer para a Bodega Bouza saindo às 10h — verificar se está incluso na reserva ou se precisa de táxi/Uber.',chips:['chip-gray:~20-30 min de carro']},
+{t:'10h30',dur:'2h30',dot:'#8a3b45',title:'🍷 Bodega Bouza — Tour + Degustação + Almoço',sub:'Melilla, zona oeste. Tour pela vinícola boutique + garagem de carros clássicos + degustação de vinhos, incluindo o Tannat premiado. Almoço harmonizado no restaurante (3-5 tempos).',chips:['chip-vino:4.5★ Tripadvisor','chip-terra:Almoço harmonizado'],
+detail:[{c:'#8a3b45',t:'Reservar com antecedência em bodegabouza.com — pacotes variam entre só degustação, ou degustação + almoço completo.'},{c:'#8a3b45',t:'Reviews destacam o guia em inglês/espanhol, o ambiente clássico-moderno e o Tannat como o grande destaque da casa.'},{c:'#8a3b45',t:'Se pedir vinho extra fora do horário do transfer combinado, pode ser necessário táxi de volta — verificar horário de retorno combinado.'}]},
+{t:'14h30',dur:'',dot:'#3f7d8c',title:'🚗 Retorno ao centro',sub:'Volta para a Ciudad Vieja ou direto para o Cerro de Montevidéu, dependendo do cansaço do grupo.',chips:['chip-azul:~25 min']},
+{t:'15h30',dur:'90 min',dot:'#7a9471',title:'⛰️ Cerro de Montevidéu + Fortaleza',sub:'Colina histórica com a Fortaleza General Artigas no topo — vista panorâmica 360° da cidade e da Baía de Montevidéu. Farol histórico também no local.',chips:['chip-mate:Vista panorâmica','chip-gray:~15 min do centro'],
+detail:[{c:'#7a9471',t:'É de onde vem o nome do Uruguai como "terra além do rio dos pássaros pintados" — vista simbólica da fundação da cidade.'}]},
+{t:'18h00',dur:'',dot:'#3f7d8c',title:'🌅 Descanso / tempo livre',sub:'Tarde mais tranquila após a vinícola — descanso no hotel, spa, ou caminhada leve na Rambla ao entardecer.',chips:['chip-azul:Ritmo tranquilo']},
+{t:'20h30',dur:'',dot:'#c1613f',title:'🍽️ Jantar leve',sub:'Depois de um dia de vinho e almoço farto, jantar mais leve — talvez pizza ou algo informal perto do hotel.',chips:['chip-terra:Jantar leve']}],
+costs:[['Bodega Bouza tour+almoço (4p)','~UYU 28.000'],['Transfer ida/volta','~UYU 2.000'],['Jantar leve (4p)','~UYU 4.000'],['TOTAL','~UYU 34.000']]},
+
+'01':{title:'Domingo 1/11 — Punta del Este + Bodega Garzón',phase:'Punta del Este',phaseColor:'#3f7d8c',phaseBg:'rgba(63,125,140,.18)',subtitle:'Dia inteiro fora — La Mano, Península, Bodega Garzón, Casapueblo ao pôr do sol',chips:['chip-azul:Dia inteiro','chip-vino:Bodega Garzón','chip-sol:Casapueblo pôr do sol'],
+timeline:[
+{t:'07h30',dur:'',dot:'#e8a33d',title:'🚗 Saída cedo de Montevidéu',sub:'~2h de estrada pela Ruta Interbalnearia até Punta del Este. Saída cedo é essencial para aproveitar o dia inteiro sem pressa no fim da tarde.',chips:['chip-sol:130km · ~2h'],
+detail:[{c:'#e8a33d',t:'Se alugar carro, a Interbalnearia é tranquila e bem sinalizada. Se for de excursão com traslado, confirmar horário de pick-up no hotel.'}]},
+{t:'09h30',dur:'2h',dot:'#3f7d8c',title:'🏖️ Punta del Este — Península e La Mano',sub:'Monumento dos Dedos na Playa Brava (foto icônica), caminhada pela Península entre Playa Brava e Playa Mansa, porto com barcos e lobos-marinhos, Avenida Gorlero para lojas.',chips:['chip-azul:La Mano','chip-gray:Cartão-postal'],
+detail:[{c:'#3f7d8c',t:'La Mano (Monumento al Ahogado) é a escultura mais fotografada do Uruguai — mãos gigantes emergindo da areia na Playa Brava.'}]},
+{t:'11h30',dur:'',dot:'#c1613f',title:'🚗 Punta del Este → Bodega Garzón',sub:'~50 min de carro pela Ruta 9 até José Ignacio e depois Garzón. Paisagem de vinhedos e campo aberto no caminho.',chips:['chip-terra:~50 min']},
+{t:'12h30',dur:'3h',dot:'#8a3b45',title:'🍷 Bodega Garzón — Tour + Almoço Mallmann',sub:'#4 do mundo no ranking World\'s Best Vineyards 2026. Arquitetura sobre rocha basáltica. Tour pela adega e vinhedos + degustação da linha Reserva. Almoço no restaurante do chef Francis Mallmann (brasas ao ar livre, 5★ Michelin).',chips:['chip-vino:#4 mundial','chip-sol:Chef Mallmann'],
+detail:[{c:'#8a3b45',t:'RESERVAR COM 1-2 SEMANAS DE ANTECEDÊNCIA — vagas limitadas por horário, sistema de reserva em bodegagarzon.com.'},{c:'#8a3b45',t:'Cancelamento sem custo até 24-48h antes dependendo da experiência. No-show ou cancelamento fora do prazo cobra 40% do valor.'},{c:'#8a3b45',t:'Reviews apontam arquitetura impressionante e tour muito bem guiado — a única ressalva de alguns visitantes é a degustação básica sem harmonização elaborada no tour simples (resolvido optando pelo almoço completo).'}]},
+{t:'16h00',dur:'',dot:'#3f7d8c',title:'🚗 Garzón → Punta Ballena',sub:'~1h de volta em direção a Punta del Este, seguindo até Punta Ballena para o pôr do sol em Casapueblo.',chips:['chip-azul:~1h']},
+{t:'17h30',dur:'90 min',dot:'#e8a33d',title:'🌅 Casapueblo — Pôr do sol icônico',sub:'Construção branca em formato orgânico do artista Carlos Páez Vilaró, sobre a falésia de Punta Ballena. O pôr do sol visto de lá é considerado um dos mais bonitos do Uruguai — programa imperdível.',chips:['chip-sol:Pôr do sol icônico','chip-gray:Punta Ballena'],
+detail:[{c:'#e8a33d',t:'Chegar com folga antes do horário do pôr do sol — os terraços enchem rápido nos dias claros. Café/bar no local para esperar com uma bebida.'}]},
+{t:'19h30',dur:'',dot:'#c1613f',title:'🚗 Retorno a Montevidéu',sub:'~2h de volta pela Interbalnearia. Chegada prevista por volta das 21h30, dependendo do trânsito de domingo à noite.',chips:['chip-terra:~2h de volta']}],
+costs:[['Aluguel carro dia inteiro','~UYU 4.500'],['Combustível + pedágios','~UYU 1.800'],['Bodega Garzón tour+almoço (4p)','~UYU 32.000'],['TOTAL','~UYU 38.300']]},
+
+'02':{title:'Segunda 2/11 — Manhã livre + Aeroporto',phase:'Partida',phaseColor:'#c1613f',phaseBg:'rgba(193,97,63,.15)',subtitle:'Check-out · Últimas compras na Ciudad Vieja · Traslado ao aeroporto',chips:['chip-terra:Voo 11h35','chip-gray:Check-out 12h'],
+timeline:[
+{t:'08h00',dur:'',dot:'#e8a33d',title:'☕ Café da manhã + arrumar malas',sub:'Último café no hotel com vista para o Rio da Prata. Aproveitar para organizar as malas com calma antes do check-out.',chips:['chip-gray:No hotel']},
+{t:'09h00',dur:'60 min',dot:'#8a3b45',title:'🛍️ Últimas compras — Mercado del Puerto ou Sarandí',sub:'5 min a pé do hotel. Última chance para levar vinhos uruguaios, doce de leite, mate e cuia como lembranças.',chips:['chip-vino:5 min do hotel','chip-gray:Vinho, mate, doce de leite']},
+{t:'10h15',dur:'',dot:'#3f7d8c',title:'🏨 Check-out — NH Columbia e AXSUR Design',sub:'Atenção: check-out do NH é às 12h, mas do AXSUR é às 11h — o casal do AXSUR deve se organizar 1h antes. Como ficam a 6 min a pé, dá para o casal do AXSUR levar a mala até o NH e aguardar juntos.',chips:['chip-vino:AXSUR sai às 11h','chip-azul:NH sai às 12h']},
+{t:'10h30',dur:'25 min',dot:'#c1613f',title:'🚕 Traslado ao Aeroporto de Carrasco',sub:'~20km, 25 min de carro. Chegada recomendada com 2h de antecedência para voo internacional (11h35).',chips:['chip-terra:~25 min']},
+{t:'11h00',dur:'',dot:'#e8a33d',title:'✈️ Check-in e embarque — MVD → GRU',sub:'Voo LATAM LA 8117, partida 11h35, chegada em GRU 14h15. Conexão em São Paulo para o voo final até Recife.',chips:['chip-sol:LATAM LA 8117']},
+{t:'17h35',dur:'',dot:'#8a3b45',title:'✈️ GRU → REC — Voo final',sub:'LATAM LA 3376, partida 17h35, chegada em Recife 20h35. Fim da viagem!',chips:['chip-vino:LATAM LA 3376']}],
+costs:[['Táxi hotéis→aeroporto (2 táxis ou 1 van)','~UYU 1.800-2.400'],['Últimas compras (4p)','variável'],['TOTAL fixo','~UYU 1.800-2.400']]},
+};
+
+const dayOrder = ['29','30','31','01','02'];
+const pillLabels = {
+  '29':'Qui<br>Chegada','30':'Sex<br>Ciudad Vieja','31':'Sáb<br>Bouza','01':'Dom<br>Punta/Garzón','02':'Seg<br>Volta'
+};
+
+function buildPills(){
+  const wrap = document.getElementById('dayPills');
+  wrap.innerHTML = '';
+  dayOrder.forEach(d=>{
+    const div = document.createElement('div');
+    div.className = 'day-pill';
+    div.id = 'pill-'+d;
+    div.onclick = ()=>selectDay(d);
+    const dateLabel = d==='01' ? '1/11' : d==='02' ? '2/11' : d+'/10';
+    div.innerHTML = `<div class="pill-date">${dateLabel}</div><div class="pill-label">${pillLabels[d]}</div>`;
+    wrap.appendChild(div);
+  });
+}
+
+function renderDay(d){
+  const day = DAYS[d];
+  const content = document.getElementById('dayContent');
+  let html = `
+    <div class="day-header">
+      <div class="day-title">${day.title}</div>
+      <div class="day-phase" style="background:${day.phaseBg};color:${day.phaseColor}">${day.phase}</div>
+      <div class="day-subtitle">${day.subtitle}</div>
+      <div class="chip-row">${day.chips.map(c=>{const[cl,txt]=c.split(':');return `<span class="chip ${cl}">${txt}</span>`}).join('')}</div>
+    </div>
+    <div class="timeline">
+  `;
+  day.timeline.forEach((item,idx)=>{
+    const detailId = 'detail-'+d+'-'+idx;
+    html += `
+      <div class="tl-item">
+        <div class="tl-dot" style="background:${item.dot}"></div>
+        <div class="tl-time-row"><span class="tl-time">${item.t}</span>${item.dur?`<span class="tl-dur">${item.dur}</span>`:''}</div>
+        <div class="tl-title">${item.title}</div>
+        <div class="tl-sub">${item.sub}</div>
+        <div class="tl-chips">${(item.chips||[]).map(c=>{const[cl,txt]=c.split(':');return `<span class="chip ${cl}">${txt}</span>`}).join('')}</div>
+        ${item.detail?`
+        <div class="detail-toggle" onclick="toggleDetail('${detailId}',this)"><span class="arrow">▸</span> Mais detalhes</div>
+        <div class="detail-box" id="${detailId}">
+          ${item.detail.map(dt=>`<div class="detail-line">${dt.t}</div>`).join('')}
+        </div>` : ''}
+      </div>
+    `;
+  });
+  html += `</div>`;
+  html += `
+    <div class="costs-box">
+      <div class="costs-title">Custos estimados do dia</div>
+      ${day.costs.map(([label,val])=>`<div class="cost-row${label==='TOTAL'?' total':''}"><span>${label}</span><span>${val}</span></div>`).join('')}
+    </div>
+  `;
+  content.innerHTML = html;
+}
+
+function selectDay(d){
+  document.querySelectorAll('.day-pill').forEach(p=>p.classList.remove('active'));
+  document.getElementById('pill-'+d).classList.add('active');
+  renderDay(d);
+  localStorage.setItem('uy_lastDay', d);
+}
+
+function toggleDetail(id, el){
+  const box = document.getElementById(id);
+  box.classList.toggle('open');
+  el.classList.toggle('open');
+}
+
+function showView(name, el){
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(n=>n.classList.remove('active'));
+  document.getElementById('view-'+name).classList.add('active');
+  if(el) el.classList.add('active');
+  document.querySelectorAll('.nav-btn').forEach(n=>{
+    if(n.getAttribute('onclick').includes("'"+name+"'")) n.classList.add('active');
+  });
+  document.querySelectorAll('.tab').forEach(t=>{
+    if(t.getAttribute('onclick').includes("'"+name+"'")) t.classList.add('active');
+  });
+  window.scrollTo(0,0);
+}
+
+function footerNav(name, el){
+  showView(name, null);
+  document.querySelectorAll('.nav-btn').forEach(n=>n.classList.remove('active'));
+  el.classList.add('active');
+  document.querySelectorAll('.tab').forEach(t=>{
+    t.classList.remove('active');
+    if(t.getAttribute('onclick').includes("'"+name+"'")) t.classList.add('active');
+  });
+}
+
+// Init
+buildPills();
+const savedDay = localStorage.getItem('uy_lastDay') || '29';
+selectDay(savedDay);
+
+// Service Worker inline para funcionar offline (PWA)
+if('serviceWorker' in navigator){
+  const swCode = `
+    const CACHE='uruguai2026-v1';
+    self.addEventListener('install',e=>{self.skipWaiting();});
+    self.addEventListener('activate',e=>{self.clients.claim();});
+    self.addEventListener('fetch',e=>{
+      e.respondWith(
+        caches.open(CACHE).then(cache=>
+          cache.match(e.request).then(resp=>{
+            const fetchPromise = fetch(e.request).then(networkResp=>{
+              cache.put(e.request, networkResp.clone());
+              return networkResp;
+            }).catch(()=>resp);
+            return resp || fetchPromise;
+          })
+        )
+      );
+    });
+  `;
+  const blob = new Blob([swCode], {type:'application/javascript'});
+  const swUrl = URL.createObjectURL(blob);
+  navigator.serviceWorker.register(swUrl).catch(()=>{});
+}
+</script>
+</body>
+</html>
